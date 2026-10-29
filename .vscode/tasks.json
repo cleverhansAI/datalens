@@ -1,0 +1,49 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "DataLens: Setup Python deps",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-lc",
+        "python3 -m venv .venv && . .venv/bin/activate && pip install -e \".[dev]\""
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "DataLens: Start + ingest COCO",
+      "type": "process",
+      "command": "${workspaceFolder}/.venv/bin/python",
+      "args": [
+        "${workspaceFolder}/scripts/start_datalens_with_coco.py",
+        "/media/max/8TB Drive/data/ODCT/odct_train/annotations/copy_paste/odct/augmented.json",
+        "--dataset-name",
+        "augmented",
+        "--api-timeout-seconds",
+        "1800",
+        "--start-frontend"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "PNPM_HOME": "${env:HOME}/.local/share/pnpm",
+          "PATH": "${env:HOME}/.local/share/pnpm/bin:${env:PATH}"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

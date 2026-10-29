@@ -1,0 +1,3 @@
+[console_scripts]
+datalens = datalens_cli.main:app
+datalens-server = datalens.server:main
